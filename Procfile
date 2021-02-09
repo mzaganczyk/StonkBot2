@@ -1,0 +1,3 @@
+web: stonkscreener app:app
+
+
