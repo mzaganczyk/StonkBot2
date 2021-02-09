@@ -4,7 +4,7 @@ import time, os
 
 os.environ['TZ'] = 'Poland'
 time.tzset()
-czas = time.strftime('%d/%m/%Y -- %H:%M:%S')
+czas = time.strftime('%d/%m/%Y %H:%M:%S')
 
 tabela = Screener()
 
