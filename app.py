@@ -1,12 +1,15 @@
 from flask import Flask, render_template
 from screener import Screener
-from datetime import datetime
+import time, os
+
+os.environ['TZ'] = 'Poland'
+time.tzset()
+czas = time.strftime('%d/%m/%Y -- %H:%M')
 
 tabela = Screener()
+
 stats = tabela.getData()
 app = Flask(__name__)
-print(stats.to_html())
-czas = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
 
 @app.route('/')
