@@ -1,3 +1,3 @@
-web: stonkscreener app:app
+web: gunicorn app:app
 
 
