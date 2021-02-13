@@ -8,7 +8,7 @@ from screener import Screener
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 os.environ['TZ'] = 'Poland'
-# time.tzset()
+time.tzset()
 
 sched = BlockingScheduler()
 
