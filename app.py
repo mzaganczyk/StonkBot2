@@ -5,21 +5,21 @@ from flask import Flask, render_template
 
 from screener import Screener
 
-from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 os.environ['TZ'] = 'Poland'
+time.tzset()
+
+sched = BlockingScheduler()
 
 
+@sched.scheduled_job('cron', id='my_job_id', seconds=10)
 def getData():
     czas = time.strftime('%d/%m/%Y -- %H:%M:%S')
     tabela = Screener()
     stats = tabela.getData()
     return [stats, czas]
 
-
-scheduler = BackgroundScheduler()
-scheduler.add_job(func=getData, trigger="interval", seconds=10)
-scheduler.start()
 
 app = Flask(__name__)
 
