@@ -8,12 +8,12 @@ from screener import Screener
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 os.environ['TZ'] = 'Poland'
-time.tzset()
+# time.tzset()
 
 sched = BlockingScheduler()
 
 
-@sched.scheduled_job('cron', id='my_job_id', seconds=10)
+@sched.scheduled_job('cron')
 def getData():
     czas = time.strftime('%d/%m/%Y -- %H:%M:%S')
     tabela = Screener()
@@ -28,6 +28,9 @@ app = Flask(__name__)
 def renderStats():
     return render_template('stats.html', data=getData()[0].to_html(classes="table table-hover table-striped"),
                            time=getData()[1])
+@app.route('/about')
+def renderAbout():
+    return render_template('about.html')
 
 
 if __name__ == '__main__':
